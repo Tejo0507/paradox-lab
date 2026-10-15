@@ -2,10 +2,12 @@ import { type ComponentType, useEffect, useRef } from 'react';
 import { CaseLogProvider } from './caseLog';
 import { href, type Route, ROUTE_LABELS, ROUTES, useHashRoute } from './router';
 import { Briefing } from '../pages/Briefing';
+import { PumpingLab } from '../pages/PumpingLab';
 import './app.css';
 
 const PAGES: Partial<Record<Route, ComponentType>> = {
   briefing: Briefing,
+  pumping: PumpingLab,
 };
 
 export function App() {

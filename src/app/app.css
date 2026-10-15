@@ -137,6 +137,9 @@
 .case-head h1:focus {
   outline: none;
 }
+.case-head__claim .math {
+  white-space: normal;
+}
 .case-head__claim {
   font: 500 var(--step-1) / 1.4 var(--font-mono);
   border: 2px dashed var(--ink);
