@@ -44,12 +44,12 @@ export function M({ children, block = false }: { children: string; block?: boole
 export function StackSymbol({ symbol }: { symbol: string }) {
   if (symbol === 'Z₀') {
     return (
-      <>
+      <span className="stack-sym">
         Z<sub>0</sub>
-      </>
+      </span>
     );
   }
-  return <>{symbol}</>;
+  return <span className="stack-sym">{symbol}</span>;
 }
 
 /** Renders a whole stack word like "XXZ₀" with proper subscripts. */

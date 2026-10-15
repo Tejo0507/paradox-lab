@@ -173,6 +173,8 @@ sub {
   --btn-fg: #fff;
 }
 .btn--small {
+  text-transform: none;
+  letter-spacing: 0.02em;
   min-height: 2rem;
   padding: var(--s1) var(--s3);
   box-shadow: 2px 2px 0 var(--ink);
@@ -193,6 +195,10 @@ sub {
 .field {
   display: grid;
   gap: var(--s1);
+}
+.field > label {
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
 }
 .field > label,
 .label {
@@ -261,6 +267,10 @@ input[type='range'] {
   max-width: 60ch;
 }
 
+.math,
+.math * {
+  text-transform: none;
+}
 .math {
   font-family: var(--font-mono);
   font-size: 0.95em;

@@ -63,27 +63,6 @@
   margin: 0;
 }
 
-.seg-label {
-  display: inline-block;
-  padding: 0 0.3em;
-  border: 2px solid var(--ink);
-  font-family: var(--font-mono);
-  line-height: 1.1;
-}
-.seg-label.seg-u,
-.seg-label.seg-z {
-  background: var(--seg-u);
-}
-.seg-label.seg-v {
-  background: var(--seg-v);
-}
-.seg-label.seg-x {
-  background: var(--seg-x);
-}
-.seg-label.seg-y {
-  background: var(--seg-y);
-}
-
 /* Dossiers: deliberately unequal, like two files dropped on a desk */
 .dossiers {
   display: grid;
@@ -138,6 +117,9 @@
 .dossier__no {
   font: 900 4rem / 0.8 var(--font-display);
   color: var(--marker);
+}
+.dossier__claim .math {
+  white-space: normal;
 }
 .dossier__claim {
   font: 500 var(--step-1) / 1.4 var(--font-mono);
@@ -299,7 +281,7 @@
 @media (max-width: 900px) {
   .hero,
   .dossiers {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--s6);
   }
   .dossier--02 {
