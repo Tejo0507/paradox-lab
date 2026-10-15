@@ -1,0 +1,337 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  /* faint ledger grid */
+  background-image:
+    linear-gradient(to right, rgb(140 129 104 / 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(140 129 104 / 0.13) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  margin: 0 0 var(--s3);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+h2 {
+  font-size: var(--step-3);
+}
+h3 {
+  font-size: var(--step-2);
+}
+h4 {
+  font-size: var(--step-1);
+}
+
+p {
+  margin: 0 0 var(--s4);
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--blueprint);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+code,
+kbd,
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+kbd {
+  border: 1px solid var(--ink-soft);
+  border-bottom-width: 2px;
+  padding: 0 0.3em;
+  background: var(--paper-sheet);
+}
+
+sup,
+sub {
+  font-size: 0.7em;
+  line-height: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blueprint);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--highlight);
+  color: var(--ink);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--s4);
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--s2) var(--s4);
+}
+.skip-link:focus {
+  top: var(--s4);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-bg: var(--paper-sheet);
+  --btn-fg: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 2.5rem;
+  padding: var(--s2) var(--s4);
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: 700 var(--step--1) / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition:
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+.btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.btn:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.btn--ink {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper-sheet);
+}
+.btn--marker {
+  --btn-bg: var(--marker);
+  --btn-fg: #fff;
+}
+.btn--small {
+  min-height: 2rem;
+  padding: var(--s1) var(--s3);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.btn[aria-pressed='true'] {
+  --btn-bg: var(--highlight);
+  box-shadow: inset 2px 2px 0 rgb(0 0 0 / 0.25);
+  transform: translate(2px, 2px);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+}
+
+/* ---------- Form controls ---------- */
+.field {
+  display: grid;
+  gap: var(--s1);
+}
+.field > label,
+.label {
+  font: 700 var(--step--1) / 1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.input {
+  font: 500 var(--step-1) / 1.2 var(--font-mono);
+  padding: var(--s2) var(--s3);
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-sheet);
+  color: var(--ink);
+  width: 100%;
+  min-width: 0;
+}
+.input:focus-visible {
+  outline-offset: 0;
+}
+.hint-text {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+input[type='range'] {
+  accent-color: var(--marker);
+  width: 100%;
+}
+
+/* ---------- Paper sheets ---------- */
+.sheet {
+  background: var(--paper-sheet);
+  border: var(--line);
+  box-shadow: var(--offset);
+  padding: var(--s5);
+  position: relative;
+  min-width: 0;
+}
+.sheet--flat {
+  box-shadow: none;
+}
+.sheet__tag {
+  position: absolute;
+  top: -0.9rem;
+  left: var(--s4);
+  background: var(--ink);
+  color: var(--paper-sheet);
+  font: 700 var(--step--1) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--s2) var(--s3);
+}
+
+.eyebrow {
+  font: 700 var(--step--1) / 1.2 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--marker);
+  margin: 0 0 var(--s2);
+}
+
+.lead {
+  font-size: var(--step-1);
+  max-width: 60ch;
+}
+
+.math {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  white-space: nowrap;
+}
+
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--s6) var(--gutter) var(--s8);
+}
+
+.stack-sm > * + * {
+  margin-top: var(--s3);
+}
+.stack-md > * + * {
+  margin-top: var(--s5);
+}
+.stack-lg > * + * {
+  margin-top: var(--s7);
+}
+
+.note {
+  border-left: 4px solid var(--marker);
+  padding: var(--s2) var(--s4);
+  background: rgb(179 38 30 / 0.06);
+  max-width: var(--measure);
+}
+.note--blue {
+  border-left-color: var(--blueprint);
+  background: rgb(31 78 121 / 0.07);
+}
+.note > :last-child {
+  margin-bottom: 0;
+}
+
+table.ledger {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: var(--step--1);
+}
+.ledger th,
+.ledger td {
+  border-bottom: var(--line-thin);
+  padding: var(--s2) var(--s3);
+  text-align: left;
+  vertical-align: top;
+}
+.ledger th {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: var(--line);
+}
+.ledger td.mono,
+.ledger .mono {
+  font-family: var(--font-mono);
+}
+.table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .sheet {
+    box-shadow: none;
+  }
+}
