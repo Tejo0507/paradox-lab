@@ -10,13 +10,6 @@
   padding: var(--s2) 0;
 }
 
-.lab-section {
-  margin-bottom: var(--s7);
-  min-width: 0;
-}
-.lab-section h2:focus {
-  outline: none;
-}
 
 .bench-grid {
   display: grid;
@@ -352,18 +345,6 @@
   word-break: break-all;
 }
 
-.case-foot {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--s4);
-  border-top: 3px double var(--ink);
-  padding-top: var(--s5);
-}
-.case-foot p {
-  margin: 0;
-}
 
 @media (max-width: 1100px) {
   .desk {
