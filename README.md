@@ -11,6 +11,16 @@ An interactive laboratory for formal language theory. Strings are evidence, prop
 | **04 Field Manual** | Short definitions linked to demos, a grammar derivation for `S → aSbb \| abb`, and the Counterexample Forge. |
 | **05 Certificate** | The complete formal proofs and a record of your session. Print, copy or download as text. |
 
+**Live:** https://paradox-lab.vercel.app
+
+## Deployment
+
+Hosted on Vercel and connected to this GitHub repository. Every push to `main` deploys to production, and pushes to other branches get preview deployments (behind Vercel login by default). Settings live in [`vercel.json`](vercel.json):
+
+- build: `npm ci` → `npm run build` → `dist/`
+- rooms use hash routes (`/#/stack`), so refreshing any room always works. Clean paths like `/stack` redirect to `/#/stack`, and any other unknown path serves the app.
+- hashed files in `/assets/` are cached for a year (`immutable`), and `index.html` is always revalidated.
+
 ## Run it
 
 ```bash
