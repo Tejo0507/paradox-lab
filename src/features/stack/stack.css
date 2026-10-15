@@ -479,6 +479,7 @@
 .delta-table th[scope='row'] {
   text-transform: none;
 }
+.delta-table thead .math,
 .delta-table td.mono .math,
 .t-log__body strong .math {
   white-space: normal;
