@@ -1,0 +1,486 @@
+.case-head__aside {
+  max-width: 26rem;
+  margin: 0;
+  border-left: 4px solid var(--blueprint);
+  padding-left: var(--s4);
+}
+
+/* The simulator reads as a machine console: blueprint ink on a lighter sheet. */
+.console {
+  background: var(--paper-sheet);
+  border: var(--line);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: var(--s5);
+  display: grid;
+  gap: var(--s5);
+  margin-bottom: var(--s7);
+  scroll-margin-top: 5rem;
+  background-image:
+    linear-gradient(to right, rgb(31 78 121 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(31 78 121 / 0.06) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+.console__input {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: var(--s5);
+  align-items: start;
+}
+.console__input .hint-text {
+  margin: var(--s1) 0 0;
+}
+.console__machine {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 11rem;
+  gap: var(--s5);
+  align-items: stretch;
+  border-top: var(--line);
+  padding-top: var(--s5);
+}
+.console__main {
+  display: grid;
+  gap: var(--s4);
+  min-width: 0;
+}
+.console__h {
+  font-size: var(--step-1);
+  margin: var(--s4) 0 var(--s2);
+}
+.console__h:first-child {
+  margin-top: 0;
+}
+.console__records {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: var(--s6);
+  border-top: var(--line);
+  padding-top: var(--s5);
+}
+
+/* ---------- Tape ---------- */
+.tape-wrap {
+  overflow-x: auto;
+  padding-bottom: var(--s2);
+}
+.tape {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0;
+  display: flex;
+  gap: 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  width: max-content;
+}
+.tape__cell {
+  width: 2.6rem;
+  height: 3.4rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  align-items: center;
+  border-right: 2px solid var(--ink);
+  font: 700 1.25rem / 1 var(--font-mono);
+  position: relative;
+  transition: background var(--t-fast);
+}
+.tape__cell:first-child {
+  border-left: 2px solid var(--ink);
+}
+.tape__cell small {
+  font: 500 0.6rem / 1 var(--font-mono);
+  color: var(--ink-faint);
+  padding-bottom: 3px;
+}
+.tape__cell.is-read {
+  background: var(--paper-deep);
+  color: var(--ink-faint);
+  text-decoration: line-through 2px;
+}
+.tape__cell.is-head {
+  background: var(--highlight);
+  box-shadow: inset 0 -5px 0 var(--marker);
+}
+.tape__cell.is-head::after {
+  content: '▼';
+  position: absolute;
+  top: -1.2rem;
+  font-size: 0.75rem;
+  color: var(--marker);
+}
+.tape__cell.is-foreign span {
+  color: var(--marker);
+}
+.tape__end {
+  color: var(--ink-faint);
+  background: repeating-linear-gradient(135deg, transparent 0 4px, rgb(27 26 23 / 0.08) 4px 6px);
+}
+.tape {
+  margin-top: 1.2rem;
+}
+
+/* ---------- State diagram ---------- */
+.diagram-wrap {
+  overflow-x: auto;
+}
+.state-diagram {
+  width: 100%;
+  height: auto;
+  max-height: 15rem;
+  color: var(--ink);
+  font-family: var(--font-mono);
+}
+.sd-edge {
+  color: var(--ink-faint);
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+.sd-edge text {
+  fill: currentColor;
+  stroke: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+.sd-edge.is-active {
+  color: var(--marker);
+  stroke-width: 3.5;
+}
+.sd-edge.is-active text {
+  font-weight: 800;
+}
+.sd-state circle {
+  fill: var(--paper-sheet);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  transition: fill var(--t-med);
+}
+.sd-state .sd-inner {
+  fill: none;
+}
+.sd-name {
+  font-size: 17px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+.sd-state.is-current circle:first-child {
+  fill: var(--highlight);
+  stroke-width: 4;
+}
+.sd-state.is-accepted circle:first-child {
+  fill: #b8d8b9;
+  stroke: var(--accept);
+}
+.sd-state.is-rejected circle:first-child {
+  fill: #f0c2bd;
+  stroke: var(--reject);
+}
+.sd-here {
+  font-size: 12px;
+  font-weight: 800;
+  fill: var(--marker);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Controls ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  align-items: center;
+}
+.controls__play {
+  min-width: 7rem;
+  justify-content: center;
+}
+.controls__speed {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  flex: 1 1 10rem;
+  max-width: 14rem;
+}
+.controls__keys {
+  margin: 0;
+}
+
+/* ---------- Stack ---------- */
+.stack-view {
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: var(--s2);
+}
+.stack-view figcaption {
+  display: grid;
+  gap: 2px;
+}
+.stack-view__word {
+  font-size: var(--step-1);
+  font-weight: 700;
+  word-break: break-all;
+}
+.stack-col {
+  list-style: none;
+  margin: 0;
+  padding: var(--s2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 3px;
+  min-height: 16rem;
+  border: 3px solid var(--ink);
+  border-top: 3px dashed var(--rule-strong);
+  background: repeating-linear-gradient(to top, transparent 0 calc(2rem + 1px), rgb(31 78 121 / 0.08) calc(2rem + 1px) calc(2rem + 3px));
+}
+.stack-cell {
+  position: relative;
+  height: 2rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  font: 800 1rem / 1 var(--font-mono);
+  background: var(--seg-y);
+}
+.stack-cell.is-bottom {
+  background: var(--ink);
+  color: var(--paper-sheet);
+}
+.stack-cell.is-top {
+  outline: 3px solid var(--highlight);
+  outline-offset: -6px;
+}
+.did-push .stack-cell.is-top {
+  animation: push-in var(--t-med) var(--ease);
+}
+.stack-cell__tag {
+  position: absolute;
+  right: calc(100% + 6px);
+  font: 700 0.6rem / 1 var(--font-mono);
+  text-transform: uppercase;
+  color: var(--marker);
+}
+.stack-cell__tag::after {
+  content: ' →';
+}
+@keyframes push-in {
+  from {
+    transform: translateY(-1.5rem);
+    opacity: 0;
+  }
+}
+
+/* ---------- Status ---------- */
+.status {
+  border: var(--line);
+  border-left-width: 8px;
+  padding: var(--s3) var(--s4);
+  background: var(--paper);
+}
+.status--accepted {
+  border-color: var(--accept);
+  background: #e3ecdc;
+}
+.status--rejected {
+  border-color: var(--reject);
+  background: #f3dfd8;
+}
+.status__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s2);
+}
+.status p {
+  margin: 0 0 var(--s2);
+  max-width: none;
+}
+
+/* ---------- Log ---------- */
+.t-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 26rem;
+  overflow-y: auto;
+  border: var(--line);
+  background: var(--paper-sheet);
+}
+.t-log li + li {
+  border-top: var(--line-thin);
+}
+.t-log button {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: var(--s2);
+  width: 100%;
+  text-align: left;
+  padding: var(--s2) var(--s3);
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: var(--step--1);
+  color: inherit;
+  cursor: pointer;
+}
+.t-log button:hover {
+  background: rgb(242 209 75 / 0.35);
+}
+.t-log .is-current button {
+  background: var(--highlight);
+}
+.t-log__no {
+  font: 800 var(--step--1) / 1.4 var(--font-mono);
+  color: var(--marker);
+}
+.t-log__body {
+  display: grid;
+  gap: 2px;
+}
+.t-log__body strong {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+.t-log__halt {
+  padding: var(--s2) var(--s3);
+  background: #f3dfd8;
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+
+.delta-table tr.is-used {
+  background: rgb(179 38 30 / 0.12);
+}
+.delta-table tr.is-next {
+  background: rgb(242 209 75 / 0.45);
+}
+.row-flag {
+  display: block;
+  font: 700 0.6rem / 1.2 var(--font-mono);
+  text-transform: uppercase;
+  color: var(--marker);
+}
+.row-flag--next {
+  color: var(--ink-soft);
+}
+.evo-table tr.is-current {
+  background: var(--highlight);
+}
+
+/* ---------- Spec / casebook ---------- */
+.lab-block {
+  margin-bottom: var(--s7);
+}
+.spec {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  border: var(--line);
+  margin: 0 0 var(--s5);
+  background: var(--paper-sheet);
+}
+.spec > div {
+  padding: var(--s3) var(--s4);
+  border-right: var(--line-thin);
+}
+.spec dt {
+  font: 800 var(--step-2) / 1 var(--font-display);
+}
+.spec dd {
+  margin: var(--s1) 0 0;
+}
+.lab-block .note {
+  margin-bottom: var(--s4);
+}
+.proof-list {
+  padding-left: 1.3em;
+  margin: 0;
+  max-width: var(--measure);
+}
+.proof-list li + li {
+  margin-top: var(--s2);
+}
+.casebook {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: var(--s4);
+}
+.casebook__item {
+  border: var(--line);
+  background: var(--paper-sheet);
+  padding: var(--s4);
+  display: grid;
+  gap: var(--s2);
+  align-content: start;
+}
+.casebook__item p {
+  margin: 0;
+  font-size: var(--step--1);
+}
+.casebook__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s2);
+}
+.casebook__word {
+  font-size: var(--step-1);
+  font-weight: 700;
+  word-break: break-all;
+}
+.casebook__item .btn {
+  justify-self: start;
+}
+
+@media (max-width: 900px) {
+  .console__input,
+  .console__records {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 620px) {
+  .console {
+    padding: var(--s4);
+  }
+  .console__machine {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s4);
+  }
+  .diagram-wrap .state-diagram {
+    min-width: 33rem;
+  }
+  /* Horizontal stack on phones: top on the LEFT, exactly like the written form XXZ₀. */
+  .stack-col {
+    flex-direction: row;
+    justify-content: flex-start;
+    min-height: 0;
+    overflow-x: auto;
+    border: 3px solid var(--ink);
+    border-left: 3px dashed var(--rule-strong);
+    background: none;
+  }
+  .stack-cell {
+    width: 2.25rem;
+  }
+  .stack-cell__tag {
+    display: none;
+  }
+}
+
+.delta-table th[scope='row'] {
+  text-transform: none;
+}
+.delta-table td.mono .math,
+.t-log__body strong .math {
+  white-space: normal;
+}
+.spec dd.math,
+.spec dd .math {
+  white-space: normal;
+}

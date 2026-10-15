@@ -3,11 +3,13 @@ import { CaseLogProvider } from './caseLog';
 import { href, type Route, ROUTE_LABELS, ROUTES, useHashRoute } from './router';
 import { Briefing } from '../pages/Briefing';
 import { PumpingLab } from '../pages/PumpingLab';
+import { StackProtocol } from '../pages/StackProtocol';
 import './app.css';
 
 const PAGES: Partial<Record<Route, ComponentType>> = {
   briefing: Briefing,
   pumping: PumpingLab,
+  stack: StackProtocol,
 };
 
 export function App() {

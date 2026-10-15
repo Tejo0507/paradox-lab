@@ -56,3 +56,8 @@ export function StackSymbol({ symbol }: { symbol: string }) {
 export function StackWord({ word }: { word: string }) {
   return <span className="math">{renderNotation(word.replace(/Z₀/g, 'Z_0'))}</span>;
 }
+
+/** Prose that mentions stack symbols: same subscript rendering, but wraps like normal text. */
+export function StackText({ text }: { text: string }) {
+  return <>{renderNotation(text.replace(/Z₀/g, 'Z_0'))}</>;
+}
