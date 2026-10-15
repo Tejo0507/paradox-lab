@@ -1,0 +1,173 @@
+.manual__layout {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: var(--s7);
+  align-items: start;
+}
+.manual__toc {
+  position: sticky;
+  top: 5rem;
+  border-top: var(--line);
+}
+.manual__toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: toc;
+}
+.manual__toc li {
+  counter-increment: toc;
+  border-bottom: var(--line-thin);
+}
+.manual__toc a {
+  display: flex;
+  gap: var(--s2);
+  padding: var(--s2) 0;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+.manual__toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--font-mono);
+  color: var(--marker);
+}
+.manual__toc a:hover {
+  background: var(--highlight);
+}
+
+.entry {
+  padding-bottom: var(--s6);
+  margin-bottom: var(--s6);
+  border-bottom: 3px double var(--ink);
+  scroll-margin-top: 5rem;
+}
+.entry h2 {
+  font-size: var(--step-3);
+}
+.entry .note {
+  margin-bottom: var(--s4);
+}
+.entry__try {
+  display: inline-block;
+  font: 700 var(--step--1) / 1.3 var(--font-mono);
+  color: var(--marker-ink);
+  margin-top: var(--s2);
+}
+
+.ops {
+  max-width: 34rem;
+}
+
+.derivation {
+  display: grid;
+  gap: var(--s3);
+  border: 2px dashed var(--ink);
+  padding: var(--s4);
+  background: var(--paper-sheet);
+  max-width: 40rem;
+}
+.derivation__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s1);
+}
+.derivation__steps li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s1) var(--s4);
+  border-bottom: 1px dotted var(--rule-strong);
+  padding: 2px 0;
+  word-break: break-all;
+}
+.derivation__rule {
+  font: 600 var(--step--1) / 1.4 var(--font-mono);
+  color: var(--ink-faint);
+}
+
+.forge {
+  display: grid;
+  gap: var(--s4);
+  margin-top: var(--s5);
+}
+.forge__lang {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s5);
+}
+.forge__lang legend {
+  margin-bottom: var(--s2);
+}
+.forge__lang label {
+  display: flex;
+  gap: var(--s2);
+  align-items: center;
+  cursor: pointer;
+}
+.forge__lang input {
+  accent-color: var(--marker);
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.forge__conds {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s2);
+}
+.forge__conds li {
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr);
+  gap: var(--s2);
+  align-items: start;
+  font-size: var(--step--1);
+}
+.forge__mark {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid currentColor;
+  font-weight: 800;
+}
+.forge__conds .is-ok {
+  color: var(--accept);
+}
+.forge__conds .is-bad {
+  color: var(--reject);
+}
+.forge__conds .is-na {
+  color: var(--ink-faint);
+}
+.forge__conds strong {
+  font-family: var(--font-mono);
+  margin-right: var(--s2);
+}
+.forge__verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3) var(--s4);
+}
+.forge__verdict p {
+  margin: 0;
+  flex: 1 1 14rem;
+}
+
+@media (max-width: 900px) {
+  .manual__layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s5);
+  }
+  .manual__toc {
+    position: static;
+  }
+}

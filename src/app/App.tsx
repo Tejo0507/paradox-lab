@@ -4,12 +4,18 @@ import { href, type Route, ROUTE_LABELS, ROUTES, useHashRoute } from './router';
 import { Briefing } from '../pages/Briefing';
 import { PumpingLab } from '../pages/PumpingLab';
 import { StackProtocol } from '../pages/StackProtocol';
+import { Chamber } from '../pages/Chamber';
+import { Manual } from '../pages/Manual';
+import { Certificate } from '../pages/Certificate';
 import './app.css';
 
 const PAGES: Partial<Record<Route, ComponentType>> = {
   briefing: Briefing,
   pumping: PumpingLab,
   stack: StackProtocol,
+  chamber: Chamber,
+  manual: Manual,
+  certificate: Certificate,
 };
 
 export function App() {
@@ -25,6 +31,27 @@ export function App() {
     const heading = document.querySelector<HTMLElement>('main h1');
     heading?.focus({ preventScroll: true });
   }, [route]);
+
+  // In-page anchors (href="#section") scroll without touching the route hash.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented) return;
+      const a = (e.target as HTMLElement).closest?.('a[href^="#"]');
+      const target = a?.getAttribute('href');
+      if (!a || !target || target.startsWith('#/') || target === '#') return;
+      const el = document.getElementById(target.slice(1));
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ block: 'start' });
+      const focusable = el.matches('h1, h2, h3') ? el : el.querySelector<HTMLElement>('h2, h3');
+      if (focusable) {
+        if (!focusable.hasAttribute('tabindex')) focusable.setAttribute('tabindex', '-1');
+        focusable.focus({ preventScroll: true });
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
 
   const Page = PAGES[route] ?? Briefing;
   const available = ROUTES.filter((r) => PAGES[r]);

@@ -5,13 +5,13 @@ export interface CaseLog {
   attacks: number;
   attacksRefuted: number;
   straddleAttacks: number;
-  auditsRun: { p: number; total: number }[];
+  auditsRun: { p: number; n: number; total: number; survivors: number }[];
   proofStepsRevealed: number;
   pdaRuns: string[];
 }
 
 const EMPTY: CaseLog = { attacks: 0, attacksRefuted: 0, straddleAttacks: 0, auditsRun: [], proofStepsRevealed: 0, pdaRuns: [] };
-const KEY = 'paradox-lab:case-log:v1';
+const KEY = 'paradox-lab:case-log:v2';
 
 function load(): CaseLog {
   try {

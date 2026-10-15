@@ -49,7 +49,7 @@ export function AttackMode({ lab }: { lab: WorkbenchState }) {
   const runAudit = () => {
     const result = auditString(lab.s, lab.p, TESTED);
     setAudit(result);
-    record((log) => ({ ...log, auditsRun: [...log.auditsRun.filter((a) => a.p !== lab.p), { p: lab.p, total: result.total }].sort((a, b) => a.p - b.p) }));
+    record((log) => ({ ...log, auditsRun: [...log.auditsRun.filter((a) => a.p !== lab.p || a.n !== lab.n), { p: lab.p, n: lab.n, total: result.total, survivors: result.survivors.length }].sort((a, b) => a.p - b.p) }));
   };
 
   const latest = attempts[0];
