@@ -1,0 +1,119 @@
+.cert__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s6);
+}
+
+.cert {
+  background: var(--paper-sheet);
+  border: var(--line);
+  outline: 1px solid var(--ink);
+  outline-offset: 6px;
+  padding: clamp(1.25rem, 5vw, 4rem);
+  max-width: 54rem;
+  margin: 0 auto;
+}
+.cert__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s5);
+  border-bottom: 3px double var(--ink);
+  padding-bottom: var(--s5);
+  margin-bottom: var(--s6);
+}
+.cert__head h1 {
+  font-size: var(--step-4);
+  margin-bottom: var(--s2);
+}
+.cert__head h1:focus {
+  outline: none;
+}
+.cert__meta {
+  margin: 0;
+  font: 600 var(--step--1) / 1.4 var(--font-mono);
+  color: var(--ink-soft);
+}
+.cert__seals {
+  display: grid;
+  gap: var(--s4);
+  justify-items: end;
+}
+.cert__section {
+  margin-bottom: var(--s6);
+}
+.cert__section h2 {
+  font-size: var(--step-2);
+  text-transform: none;
+  border-bottom: var(--line-thin);
+  padding-bottom: var(--s2);
+}
+.cert__section p,
+.cert__section li {
+  font-family: 'Atkinson Hyperlegible', Georgia, serif;
+  max-width: none;
+  text-align: justify;
+  hyphens: auto;
+}
+.cert__section strong {
+  font-variant: small-caps;
+  letter-spacing: 0.02em;
+}
+.cert__rules {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+.cert__rules li {
+  text-align: left !important;
+  margin-bottom: var(--s1);
+}
+.qed {
+  text-align: right !important;
+  font-size: var(--step-1);
+  margin-top: calc(-1 * var(--s3));
+}
+.cert__table {
+  margin: var(--s4) 0 0;
+  max-width: 26rem;
+}
+.cert__table figcaption {
+  font-weight: 700;
+  margin-bottom: var(--s2);
+}
+.cert__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s4);
+  flex-wrap: wrap;
+  border-top: var(--line-thin);
+  padding-top: var(--s4);
+  font: 700 var(--step--1) / 1 var(--font-mono);
+}
+
+@media print {
+  .masthead,
+  .colophon {
+    display: none !important;
+  }
+  .page {
+    padding: 0;
+  }
+  .cert {
+    border: none;
+    outline: none;
+    padding: 0;
+    max-width: none;
+  }
+  .cert__section {
+    break-inside: auto;
+  }
+  .cert__section h2 {
+    break-after: avoid;
+  }
+  .stamp {
+    animation: none;
+  }
+}
