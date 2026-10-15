@@ -473,6 +473,9 @@
   }
 }
 
+.delta-table {
+  min-width: 36rem;
+}
 .delta-table th[scope='row'] {
   text-transform: none;
 }
