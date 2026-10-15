@@ -12,8 +12,11 @@ export const ROUTE_LABELS: Record<Route, { code: string; title: string }> = {
   certificate: { code: '05', title: 'Certificate' },
 };
 
-export function parseHash(hash: string): Route {
-  const name = hash.replace(/^#\/?/, '').split(/[/?]/)[0];
+/** Route hashes look like "#/stack". Plain in-page anchors ("#m-forge") return null and leave the route alone. */
+export function parseHash(hash: string): Route | null {
+  if (hash === '' || hash === '#' || hash === '#/') return 'briefing';
+  if (!hash.startsWith('#/')) return null;
+  const name = hash.slice(2).split(/[/?]/)[0];
   return (ROUTES as readonly string[]).includes(name) ? (name as Route) : 'briefing';
 }
 
@@ -26,9 +29,12 @@ export function navigate(route: Route) {
 }
 
 export function useHashRoute(): Route {
-  const [route, setRoute] = useState<Route>(() => parseHash(window.location.hash));
+  const [route, setRoute] = useState<Route>(() => parseHash(window.location.hash) ?? 'briefing');
   useEffect(() => {
-    const onChange = () => setRoute(parseHash(window.location.hash));
+    const onChange = () => {
+      const next = parseHash(window.location.hash);
+      if (next) setRoute(next);
+    };
     window.addEventListener('hashchange', onChange);
     return () => window.removeEventListener('hashchange', onChange);
   }, []);
