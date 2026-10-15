@@ -1,0 +1,68 @@
+:root {
+  /* Paper & ink */
+  --paper: #e9dfc7;
+  --paper-sheet: #f5efe0;
+  --paper-deep: #d9cba9;
+  --ink: #1b1a17;
+  --ink-soft: #4a463d;
+  --ink-faint: #7a7362;
+  --rule: #b9ad8f;
+  --rule-strong: #8c8168;
+
+  /* Signal colours */
+  --marker: #b3261e; /* red evidence marker */
+  --marker-ink: #8e1c16;
+  --highlight: #f2d14b; /* highlighter */
+  --blueprint: #1f4e79; /* machine ink */
+  --accept: #2c6a3a;
+  --reject: #b3261e;
+
+  /* Decomposition segments (always paired with a text label) */
+  --seg-u: #d6cab0;
+  --seg-v: #f0b54a;
+  --seg-x: #a9c3a2;
+  --seg-y: #8fbbe0;
+  --seg-z: #d6cab0;
+
+  /* Type */
+  --font-display: 'Big Shoulders Stencil Display', 'Arial Narrow', sans-serif;
+  --font-body: 'Atkinson Hyperlegible', 'Segoe UI', sans-serif;
+  --font-mono: 'Martian Mono', 'Consolas', monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2rem;
+  --step-4: clamp(2.5rem, 6vw, 3.5rem);
+  --step-5: clamp(3.5rem, 13vw, 9rem);
+
+  /* Space (4px scale) */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4rem;
+
+  --line: 2px solid var(--ink);
+  --line-thin: 1px solid var(--rule-strong);
+  --offset: 4px 4px 0 var(--ink);
+  --radius: 2px;
+  --measure: 68ch;
+  --page-max: 1240px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 140ms;
+  --t-med: 260ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 0ms;
+    --t-med: 0ms;
+  }
+}
