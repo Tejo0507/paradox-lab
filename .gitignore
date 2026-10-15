@@ -9,5 +9,6 @@ coverage/
 Thumbs.db
 .vscode/*
 !.vscode/extensions.json
+.vercel
 playwright-report/
 test-results/
