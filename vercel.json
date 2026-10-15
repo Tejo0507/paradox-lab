@@ -4,26 +4,64 @@
   "installCommand": "npm ci",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": true,
   "redirects": [
-    { "source": "/pumping", "destination": "/#/pumping", "permanent": false },
-    { "source": "/stack", "destination": "/#/stack", "permanent": false },
-    { "source": "/chamber", "destination": "/#/chamber", "permanent": false },
-    { "source": "/manual", "destination": "/#/manual", "permanent": false },
-    { "source": "/certificate", "destination": "/#/certificate", "permanent": false }
+    {
+      "source": "/pumping",
+      "destination": "/#/pumping",
+      "permanent": false
+    },
+    {
+      "source": "/stack",
+      "destination": "/#/stack",
+      "permanent": false
+    },
+    {
+      "source": "/chamber",
+      "destination": "/#/chamber",
+      "permanent": false
+    },
+    {
+      "source": "/manual",
+      "destination": "/#/manual",
+      "permanent": false
+    },
+    {
+      "source": "/certificate",
+      "destination": "/#/certificate",
+      "permanent": false
+    }
   ],
-  "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }],
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
       ]
     }
   ]
