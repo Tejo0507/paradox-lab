@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkAnB2n, checkAnBnCn, compress, makeAnBnCn, sup } from './languages';
+import { checkAnB2n, checkAnBnCn, compress, conditionsFor, makeAnBnCn, sup } from './languages';
 
 describe('L₁ = { aⁿbⁿcⁿ | n ≥ 0 }', () => {
   it.each(['abc', 'aabbcc', 'aaabbbccc', 'aaaabbbbcccc'])('accepts %s', (s) => {
@@ -43,6 +43,22 @@ describe('L₂ = { aⁿb²ⁿ | n ≥ 1 }', () => {
   it.each(['abb', 'aabbbb', 'aaabbbbbb'])('accepts %s', (s) => expect(checkAnB2n(s).member).toBe(true));
   it.each(['', 'ab', 'aabbb', 'aabbbbb', 'ba', 'bbaa', 'abab', 'bb', 'a'])('rejects %s', (s) => expect(checkAnB2n(s).member).toBe(false));
   it('explains the empty string with n ≥ 1', () => expect(checkAnB2n('').reason).toMatch(/n ≥ 1/));
+});
+
+describe('condition checklist', () => {
+  it('agrees with the membership verdict for both languages', () => {
+    const samples = ['', 'abc', 'aabbcc', 'acb', 'aabbc', 'ab', 'abb', 'aabbbb', 'ba', 'abxb', 'bb'];
+    for (const s of samples) {
+      expect(conditionsFor('anbncn', s).every((c) => c.ok === true), s).toBe(checkAnBnCn(s).member);
+      expect(conditionsFor('anb2n', s).every((c) => c.ok === true), s).toBe(checkAnB2n(s).member);
+    }
+  });
+  it('pinpoints the violated condition', () => {
+    const conds = conditionsFor('anb2n', 'aabbb');
+    expect(conds.find((c) => c.ok === false)?.label).toBe('#b = 2·#a');
+    expect(conditionsFor('anbncn', 'a?c').find((c) => c.ok === false)?.detail).toMatch(/“\?”/);
+    expect(conditionsFor('anbncn', 'a?c')[1].ok).toBeNull();
+  });
 });
 
 describe('notation helpers', () => {

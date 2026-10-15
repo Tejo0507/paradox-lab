@@ -97,7 +97,45 @@ export function checkAnB2n(s: string): Verdict {
   };
 }
 
-const SUPERSCRIPTS = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
+export type LanguageId = 'anbncn' | 'anb2n';
+
+export interface Condition {
+  label: string;
+  /** null when the condition can't be judged because an earlier one failed. */
+  ok: boolean | null;
+  detail: string;
+}
+
+/** Every membership condition evaluated separately, for the Counterexample Forge checklist. */
+export function conditionsFor(lang: LanguageId, s: string): Condition[] {
+  const sigma = lang === 'anbncn' ? ['a', 'b', 'c'] : ['a', 'b'];
+  const c = countSymbols(s);
+  const foreign = [...s].filter((ch) => !sigma.includes(ch));
+  const alphabetOk = foreign.length === 0;
+  const orderOk = alphabetOk ? (lang === 'anbncn' ? /^a*b*c*$/ : /^a*b*$/).test(s) : null;
+  const out: Condition[] = [
+    {
+      label: `Alphabet Σ = {${sigma.join(', ')}}`,
+      ok: alphabetOk,
+      detail: alphabetOk ? 'Only legal symbols.' : `Foreign symbol${foreign.length > 1 ? 's' : ''}: ${[...new Set(foreign)].map((f) => `“${f}”`).join(' ')}.`,
+    },
+    {
+      label: lang === 'anbncn' ? 'Order a…b…c…' : 'Order a…b…',
+      ok: orderOk,
+      detail: orderOk === null ? 'Not judged: the alphabet check failed.' : orderOk ? 'Every a precedes every b' + (lang === 'anbncn' ? ', every b precedes every c.' : '.') : 'Some symbol appears after one that should follow it.',
+    },
+  ];
+  if (lang === 'anbncn') {
+    const eq = c.a === c.b && c.b === c.c;
+    out.push({ label: '#a = #b = #c', ok: alphabetOk ? eq : null, detail: `#a=${c.a}, #b=${c.b}, #c=${c.c}.` });
+  } else {
+    out.push({ label: '#b = 2·#a', ok: alphabetOk ? c.b === 2 * c.a : null, detail: `#a=${c.a} so ${2 * c.a} b’s needed; found ${c.b}.` });
+    out.push({ label: 'n ≥ 1 (at least one a)', ok: c.a >= 1, detail: c.a >= 1 ? `n = ${c.a}.` : 'No a at all.' });
+  }
+  return out;
+}
+
+const SUPERSCRIPTS =['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
 
 /** Renders a non-negative integer as Unicode superscript digits. */
 export function sup(n: number): string {
